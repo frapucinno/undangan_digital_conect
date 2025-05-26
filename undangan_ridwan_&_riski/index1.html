@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan {{nama_panggilan_wanita}} & {{nama_panggilan_pria}}</title>
+  <style>
+    /* Mengatur keseluruhan tampilan halaman */
+    body {
+        background-color: #fff8e7;    /* Warna latar belakang (cream) */
+        font-family: sans-serif;      /* Jenis huruf tanpa kait */
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+      
+    .hero-kanan {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+    /* mobile default */
+    .layout {
+      display: block;
+    }
+    .hero-left {
+      display: none;
+    }
+    .hero-right {
+      width: 100%;
+      padding: 24px;
+      background-color: #fff8e7;
+    }
+
+    /* desktop */
+    @media (min-width: 768px) {
+      .layout {
+        display: flex;
+        height: 100vh;
+      }
+
+      .hero-left {
+        display: block;
+        width: 90%;
+        background-image: url('gambar-besar.jpg'); /* sesuaikan nama file gambar */
+        background-size: cover;
+        background-position: center;
+      }
+
+      .hero-right {
+        width: 50%;
+        padding: 60px;
+        overflow-y: auto;
+      }
+    }
+
+
+    .keterangan1 {
+        font-size: 25px;
+        color: #3a3a3a;
+        margin-top: 10px;
+      }
+
+    /* Gaya untuk judul utama */
+    h1 {
+        font-size: 55px;
+        color: #5e3023;
+        margin-top: 10px;
+      }
+      
+    /* Gaya untuk paragraf */
+    .tanggal {
+        font-size: 20px;
+        color: #3a3a3a;
+        margin-top: 40px;
+      }
+        
+    .panah {
+        font-size: 32px;
+        animation: lompat 1.5s infinite;
+        margin-top: 10px;
+      }
+      
+    @keyframes lompat {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(8px); }
+        100% { transform: translateY(0); }
+      }
+      
+    .spasi-scroll {
+        height:5vh; /* 100% tinggi layar */
+      }
+
+    .scroll-hint {
+        position: absolute;
+        bottom: 20px;
+        text-align: center;
+        color: #5e3023;
+        font-size: 18px;
+        animation: muncul 2s ease-out;
+      }
+
+    .foto-love {
+        padding: 50px 16px;
+        text-align: center;
+    }
+
+    .zoom-in img {
+        max-width: 400px;
+        height: auto;
+        max-height: 500px; /* atau sesuai kebutuhan */
+        border-radius: 12px;
+        object-fit: cover;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .isi{
+      background:  #fceee3;
+      background-image: url('motif.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      width: 70%;
+      max-width: 420px;
+      min-height: 700px;
+      margin: 50px auto;
+      margin-bottom: 0px;
+      padding: 90px 25px;
+
+      border-radius: 200px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    #countdown-container {
+        text-align: center;
+        background-color: #fff0f0;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    #countdown span {
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 0 5px;
+        color: #b30000;
+    }
+
+    .resepsi{
+      background:  #fceee3;
+      background-image: url('motif.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      width: 70%;
+      max-width: 420px;
+      min-height: 700px;
+      margin: 50px auto;
+      margin-top: 0px;
+      padding: 90px 25px;
+
+      border-radius: 200px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+
+    .box-acara h1,
+    .box-acara p {
+      margin-bottom: 30px;
+    }
+
+    .box-acara h2 {
+      margin-top: 80px;
+    }
+
+    .box-acara h1 {
+      font-size: 4rem;
+      color: #6b2e2e;
+      margin-top: 20;
+    }
+
+    .box-acara p {
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .btn-lokasi {
+      display: inline-block;
+      background: #e6b94c;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+      text-decoration: none;
+      margin-top: 20px;
+    }
+
+    .kutipan, .galeri {
+        padding: 30px 16px;
+        text-align: center;
+      }
+
+    .kutipan, .doa h3 {
+        font-style: italic;
+        color: #5e3023;
+      }
+      
+      .fade-right img {
+        max-width: 500px;
+        height: auto;
+        max-height: 500px; /* atau sesuai kebutuhan */
+        border-radius: 12px;
+        object-fit: cover;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+        .fade-right img{
+          max-height: 300px;
+          max-width: 300px;
+        }
+
+        .box-acara {
+        padding: 40px 20px;
+        min-height: 540px;
+        border-radius: 60px;
+      }
+        .box-acara .isi h1 {
+        font-size: 3.5rem;
+      }
+      
+
+
+    .galeri-zoom {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .galeri-zoom :hover {
+      transform: scale(1.02);
+    }
+
+    .item {
+      display: block;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Landscape image span 2 columns */
+    .item.landscape {
+      grid-column: span 2;
+    }
+
+    .item.potrait {
+      grid-column: span 1;
+    }
+
+    .gift-section {
+      background: #ffffff;
+      padding: 40px 20px;
+      text-align: center;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .toggle-button {
+      margin-top: 20px;
+      background: #ffffff;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 1s;
+    }
+
+    .toggle-button:hover {
+      background: #d9a634;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .bank-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      position: relative;
+      text-align: left;
+    }
+
+    .bank-info {
+      margin-left: 40px;
+    }
+
+    .bank-name {
+      float: right;
+      font-weight: bold;
+      color: #004AAD;
+    }
+
+    .account-number {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    .copy-btn {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      background: #999;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover {
+      background: #777;
+    }
+
+    .gift-details-wrapper {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.6s ease, opacity 0.4s ease;
+    }
+
+    .gift-details-wrapper.active {
+      max-height: 1000px; /* cukup besar melebihi konten maksimum */
+      opacity: 1;
+    }
+
+    .gift-content-wrapper {
+      overflow: hidden;
+      height: 0;
+      opacity: 0;
+      transition: height 0.6s ease, opacity 0.4s ease;
+    }
+
+    .gift-content {
+      transform: translateY(10px);
+      transition: transform 0.4s ease;
+      padding: 16px;
+      background: #fff;
+      border-radius: 12px;
+    }
+
+    .gift-content-wrapper.show {
+      opacity: 1;
+    }
+
+    .gift-content-wrapper.show .gift-content {
+      transform: translateY(0);
+    }
+
+    .bank-card, .gift-info {
+      background: #f5f5f5;
+      margin: 16px 0;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .container {
+        max-width: 500px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: #fdf2ef;
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .counter {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+    }
+
+    .hadir-box, .tidak-hadir-box {
+        width: 100px;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .hadir-box {
+        background-color: #d4f9d4;
+        color: #2e7d32;
+    }
+
+    .tidak-hadir-box {
+        background-color: #ffd6d6;
+        color: #d32f2f;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    input, textarea, select, button {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        background-color: #913a3a;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        border: none;
+    }
+
+    .comments {
+        margin-top: 20px;
+        text-align: left;
+    }
+
+    .comment-item {
+        background-color: #fff;
+        margin: 10px 0;
+        padding: 10px;
+        border-left: 5px solid #913a3a;
+        border-radius: 5px;
+    }
+  </style>
+  <!-- Lightbox2 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/css/lightbox.min.css" rel="stylesheet" />
+  <!-- Fancybox CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
+</head>
+
+<body>
+  <div class="layout">
+    <div class="hero-left"></div> <!-- gambar besar -->
+    <div class="hero-right">
+      <!-- isi undangan -->
+      <section class="hero-kanan">
+        <p class="keterangan1">The Wedding of</p>
+        <h1 class="judul">{{nama_panggilan_wanita}} & {{nama_panggilan_pria}}</h1>
+        <p class="tanggal">{{tanggal}}</p>
+
+        <div class="scroll-hint">
+            <p>Scroll ke bawah untuk melihat detail acara</p>
+            <div class="panah">⬇</div>
+        </div>
+      </section>
+
+      <section class="spasi-scroll"></section>
+
+      <section class="foto-love">
+        <div class="zoom-in">
+            <img src="{{foto_utama}}" alt="Foto Prewedding" style="width: 100%; border-radius: 12px;" />
+        </div>
+      </section>
+      
+      <section class="doa">
+        <div class="fade-up">
+            <h2>WITH LOVE</h2>
+            <h3>“Dan diantara tanda-tanda kekuasaanNya ialah Dia menciptakan 
+            untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung 
+            dan merasa tenteram kepadanya, dan dijadikanNya diantaramu rasa kasih dan sayang. 
+            Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir.”
+            <br>(Qs. Ar. Rum (30) : 21)</h3>
+        </div>
+      </section>
+      
+      <section class="bride_n_groom">
+        <div class="opening1">
+            <p>Assalamualaikum Wr. Wb.<br>
+                Dengan memohon Rahmat & Ridho Allah SWT, kami bermaksud<br>
+                mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara<br>
+                pernikahan putra-putri kami:</p>
+        </div>
+        <div class="bride">
+            <div class="bride">
+            <img src="bride.jpeg" alt="Foto bride" style="width: 200px; border-radius: 100px;" />
+            <h1 class="panggilan1">{{nama_panggilan_wanita}}</h1>
+            <h2 class="nama_lengkap1">{{nama_lengkap_wanita}}</h2>
+            <p>Putri {{anak_ke_bride}} dari Bapak {{nama_ayah_bride}}<br>
+            & {{nama_ibu_bride}}</p>
+            <h1>&</h1>
+            <img src="groom.jpeg" alt="Foto bride" style="width: 200px; border-radius: 100px;" />
+            <h1 class="panggilan1">{{nama_panggilan_pria}}</h1>
+            <h2 class="nama_lengkap1">{{nama_lengkap_pria}}</h2>
+            <p>Putra {{anak_ke_groom}} dari Bapak {{nama_ayah_groom}}<br>
+            & Ibu {{nama_ibu_groom}}</p>
+        </div>
+        </div>
+      </section>
+
+      <div id="countdown-container">
+          <h3>SAVE THE DATE</h3>
+          <div id="countdown">
+              <span id="days">00</span> Hari
+              <span id="hours">00</span> Jam
+              <span id="minutes">00</span> Menit
+              <span id="seconds">00</span> Detik
+          </div>
+      </div>
+
+
+      <section class="box-acara">
+        <div class="isi">
+            <h2>AKAD NIKAH</h2>
+            <p>{{hari_akad}}</p>
+            <h1>{{tgl_akad}}</h1>
+            <p>{{bulan_tahun_akad}}</p>
+            <p>Pukul: {{jam_akad}}</p>
+            <p>📍 {{lokasi_akad}}</p>
+            <a href="#" class="btn-lokasi">📌 LIHAT LOKASI</a>
+        </div>
+      </section>
+
+      <section class="box-acara">
+        <div class="resepsi">
+            <h2>RESEPSI</h2>
+            <p>{{hari_resepsi}}</p>
+            <h1>{{tgl_respsi}}</h1>
+            <p>{{bulan_tahun_respsi}}</p>
+            <p>Pukul: {{jam_respsi}} - Selesai</p>
+            <p>📍 {{lokasi_respsi}}</p>
+            <a href="#" class="btn-lokasi">📌 LIHAT LOKASI</a>
+        </div>
+      </section>
+      
+      <section class="kutipan">
+        <div class="fade-left">
+          <h3>“Cinta sejati tumbuh ketika dua jiwa saling mendukung.”</h3>
+        </div>
+      </section>
+      
+      <section class="galeri">
+        <div class="fade-right">
+          <img src="preweed.jpg" alt="Foto Prewedding" style="width: 100%; border-radius: 12px;" />
+        </div>
+      </section>
+      
+      <section class="galeri-statis">
+        <div class="galeri-zoom">
+          <a data-fancybox="galeriku" href="{{galeri1}}" data-caption="Foto 1" class="item landscape">
+            <img src="{{galeri1}}" alt="Foto 1" />
+          </a>
+          <a data-fancybox="galeriku" href="{{galeri2}}" data-caption="Foto 2" class="item landscape">
+            <img src="{{galeri2}}" alt="Foto 2" />
+          </a>
+          <a data-fancybox="galeriku" href="{{galeri3}}" data-caption="Foto 3" class="item portrait">
+            <img src="{{galeri3}}" alt="Foto 3"  />
+          </a>
+          <a data-fancybox="galeriku" href="{{galeri4}}" data-caption="Foto " class="item portrait">
+            <img src="{{galeri4}}" alt="Foto 3" />
+          </a>
+        </div>
+      </section>
+      
+      <div class="gift-section">
+        <h2>WEDDING GIFT</h2>
+        <p class="gift-text">Doa restu Anda merupakan karunia yang sangat berarti bagi kami...</p>
+        <button class="gift-toggle">➝ KLIK DISINI</button>
+
+        <div class="gift-content-wrapper" style="height: 0;">
+          <div class="gift-content">
+            <!-- Konten rekening dan alamat -->
+            <div class="bank-card">
+              <p>{{rekening1}}<br><strong>{{nama_rekening1}}</strong></p>
+              <button onclick="copyToClipboard('{{rekening1}}')">Copy</button>
+            </div>
+
+            <div class="bank-card">
+              <p>{{rekening2}}<br><strong>{{nama_rekening2}}</strong></p>
+              <button onclick="copyToClipboard('rekening2')">Copy</button>
+            </div>
+
+            <div class="gift-info">
+              <h3>🎁 Kirim Hadiah</h3>
+              <p>
+                Nama Penerima: {{penerima_hadiah}}<br>
+                No HP: {{hp_penerima_hadiah}}<br>
+                Alamat: {{alamat_hadiah}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="container">
+          <h2>WISHES</h2>
+          <p>Berikan ucapan harapan dan do’a kepada kedua mempelai</p>
+          <div class="counter">
+              <div class="hadir-box">
+                  <p id="count-hadir">0</p>
+                  <span>Hadir</span>
+              </div>
+              <div class="tidak-hadir-box">
+                  <p id="count-tidak">0</p>
+                  <span>Tidak Hadir</span>
+              </div>
+          </div>
+          <form id="rsvpForm">
+              <input type="text" id="nama" placeholder="Nama" required>
+              <textarea id="ucapan" placeholder="Ucapan" required></textarea>
+              <select id="statusHadir" required>
+                  <option value="" disabled selected>Hadir</option>
+                  <option value="Hadir">Hadir</option>
+                  <option value="Tidak Hadir">Tidak Hadir</option>
+              </select>
+              <button type="submit">Kirim</button>
+          </form>
+          <div class="comments" id="comments"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Lightbox2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/js/lightbox.min.js"></script>
+  <!-- Fancybox JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+  <script>
+    const toggleBtn = document.querySelector('.gift-toggle');
+    const wrapper = document.querySelector('.gift-content-wrapper');
+    const content = document.querySelector('.gift-content');
+
+    toggleBtn.addEventListener('click', () => {
+      const isOpen = wrapper.classList.contains('show');
+      
+      if (!isOpen) {
+        const fullHeight = content.scrollHeight;
+        wrapper.style.height = fullHeight + 'px';
+        wrapper.classList.add('show');
+      } else {
+        wrapper.style.height = wrapper.scrollHeight + 'px'; // force reflow
+        requestAnimationFrame(() => {
+          wrapper.style.height = '0px';
+          wrapper.classList.remove('show');
+        });
+      }
+    });
+
+    wrapper.addEventListener('transitionend', (e) => {
+      if (wrapper.classList.contains('show')) {
+        wrapper.style.height = 'auto'; // allow dynamic resizing
+      }
+    });
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text)
+        .then(() => alert("Nomor rekening disalin!"))
+        .catch(() => alert("Gagal menyalin"));
+    }
+
+    // Animasi: buat teks muncul perlahan dari bawah
+    gsap.registerPlugin(ScrollTrigger);
+      
+      gsap.from(".keterangan1", {
+        y: 50,           // geser dari bawah 50px
+        opacity: 0,      // mulai dari transparan
+        duration: 1.2    // selama 1.2 detik
+      });
+
+      gsap.from(".judul", {
+        y: 50,           // geser dari bawah 50px
+        opacity: 0,      // mulai dari transparan
+        duration: 1.2,    // selama 1.2 detik
+        delay:0.5
+      });
+      
+      gsap.from(".deskripsi", {
+        y: 50,
+        opacity: 0,
+        duration: 1.2,
+        delay: 1       // muncul setengah detik setelah judul
+      });
+      
+      gsap.from(".acara", {
+        scrollTrigger: ".detail-acara", // elemen yang memicu
+        y: 50,
+        opacity: 0,
+        duration: 2.5,
+      });
+      
+      gsap.from(".scroll-hint", {
+        y: 50,           // geser dari bawah 50px
+        opacity: 0,      // mulai dari transparan
+        duration: 1.2,    // selama 1.2 detik
+        delay:2
+      })
+      
+      gsap.to(".scroll-hint", {
+        scrollTrigger: {
+          trigger: ".detail-acara", // ketika bagian acara muncul
+          start: "top 80%",
+          once: true
+          
+        },
+        opacity: 0,
+        duration: 0.5,
+        pointerEvents: "none"
+      });
+
+    gsap.from(".fade-left", {
+        scrollTrigger: ".fade-left",
+        x: -100,
+        opacity: 0,
+        duration: 2,
+        ease: "power2.out"
+      });
+      
+      gsap.from(".fade-right", {
+        scrollTrigger: ".fade-right",
+        x: 100,
+        opacity: 0,
+        duration: 2,
+        ease: "power2.out"
+      });
+      
+      // Ubah tanggal ini ke tanggal pernikahanmu (format: YYYY-MM-DDTHH:MM:SS)
+    const weddingDate = new Date("{{tanggal_countdown}}").getTime();
+
+    const updateCountdown = () => {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        if (distance < 0) {
+            document.getElementById("countdown").innerHTML = "Selamat Menempuh Hidup Baru!";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = String(days).padStart(2, '0');
+        document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+        document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+        document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+    };
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+      
+    const sliderContainer = document.querySelector(".slider-container");
+    const prevBtn = document.querySelector(".prev-btn");
+    const nextBtn = document.querySelector(".next-btn");
+
+    prevBtn.addEventListener("click", () => {
+      sliderContainer.scrollBy({ left: -320, behavior: "smooth" });
+    });
+
+    nextBtn.addEventListener("click", () => {
+      sliderContainer.scrollBy({ left: 320, behavior: "smooth" });
+    });
+
+    let countHadir = 0;
+    let countTidak = 0;
+
+    document.getElementById("rsvpForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const nama = document.getElementById("nama").value.trim();
+        const ucapan = document.getElementById("ucapan").value.trim();
+        const status = document.getElementById("statusHadir").value;
+
+        if (!nama || !ucapan || !status) return;
+
+        const commentsDiv = document.getElementById("comments");
+
+        const newComment = document.createElement("div");
+        newComment.classList.add("comment-item");
+        newComment.innerHTML = `<strong>${nama}</strong>: ${ucapan}`;
+
+        commentsDiv.prepend(newComment); // Tambahkan ke atas
+
+        // Update counter
+        if (status === "Hadir") {
+            countHadir++;
+            document.getElementById("count-hadir").textContent = countHadir;
+        } else {
+            countTidak++;
+            document.getElementById("count-tidak").textContent = countTidak;
+        }
+
+        // Reset form
+        document.getElementById("rsvpForm").reset();
+    });
+  </script>
+
+
+</body>
+</html>
