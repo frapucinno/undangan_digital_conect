@@ -1,68 +1,74 @@
+// INTRO
+document.getElementById('openInvitation').addEventListener('click', function() {
+  document.getElementById('cover').style.display = 'none';
+  document.getElementById('mainContent').style.display = 'block';
+});
+
 // Animasi: buat teks muncul perlahan dari bawah
 gsap.registerPlugin(ScrollTrigger);
   
-  gsap.from(".keterangan1", {
-    y: 50,           // geser dari bawah 50px
-    opacity: 0,      // mulai dari transparan
-    duration: 1.2    // selama 1.2 detik
-  });
+gsap.from(".keterangan1", {
+  y: 50,           // geser dari bawah 50px
+  opacity: 0,      // mulai dari transparan
+  duration: 1.2    // selama 1.2 detik
+});
 
-  gsap.from(".judul", {
-    y: 50,           // geser dari bawah 50px
-    opacity: 0,      // mulai dari transparan
-    duration: 1.2,    // selama 1.2 detik
-    delay:0.5
-  });
+gsap.from(".judul", {
+  y: 50,           // geser dari bawah 50px
+  opacity: 0,      // mulai dari transparan
+  duration: 1.2,    // selama 1.2 detik
+  delay:0.5
+});
   
-  gsap.from(".deskripsi", {
-    y: 50,
-    opacity: 0,
-    duration: 1.2,
-    delay: 1       // muncul setengah detik setelah judul
-  });
+gsap.from(".deskripsi", {
+  y: 50,
+  opacity: 0,
+  duration: 1.2,
+  delay: 1       // muncul setengah detik setelah judul
+});
   
-  gsap.from(".acara", {
-    scrollTrigger: ".detail-acara", // elemen yang memicu
-    y: 50,
-    opacity: 0,
-    duration: 2.5,
-  });
+gsap.from(".acara", {
+  scrollTrigger: ".detail-acara", // elemen yang memicu
+  y: 50,
+  opacity: 0,
+  duration: 2.5,
+});
   
-  gsap.from(".scroll-hint", {
-    y: 50,           // geser dari bawah 50px
-    opacity: 0,      // mulai dari transparan
-    duration: 1.2,    // selama 1.2 detik
-    delay:2
-  })
+gsap.from(".scroll-hint", {
+  y: 50,           // geser dari bawah 50px
+  opacity: 0,      // mulai dari transparan
+  duration: 1.2,    // selama 1.2 detik
+  delay:2
+})
   
-  gsap.to(".scroll-hint", {
-    scrollTrigger: {
-      trigger: ".detail-acara", // ketika bagian acara muncul
-      start: "top 80%",
-      once: true
-      
-    },
-    opacity: 0,
-    duration: 0.5,
-    pointerEvents: "none"
-  });
+gsap.to(".scroll-hint", {
+  scrollTrigger: {
+    trigger: ".detail-acara", // ketika bagian acara muncul
+    start: "top 80%",
+    once: true
+    
+  },
+  opacity: 0,
+  duration: 0.5,
+  pointerEvents: "none"
+});
 
 gsap.from(".fade-left", {
-    scrollTrigger: ".fade-left",
-    x: -100,
-    opacity: 0,
-    duration: 2,
-    ease: "power2.out"
-  });
+  scrollTrigger: ".fade-left",
+  x: -100,
+  opacity: 0,
+  duration: 2,
+  ease: "power2.out"
+});
   
-  gsap.from(".fade-right", {
-    scrollTrigger: ".fade-right",
-    x: 100,
-    opacity: 0,
-    duration: 2,
-    ease: "power2.out"
-  });
-  
+gsap.from(".fade-right", {
+  scrollTrigger: ".fade-right",
+  x: 100,
+  opacity: 0,
+  duration: 2,
+  ease: "power2.out"
+});
+
   // Ubah tanggal ini ke tanggal pernikahanmu (format: YYYY-MM-DDTHH:MM:SS)
 const weddingDate = new Date("{{tanggal_countdown}}").getTime();
 

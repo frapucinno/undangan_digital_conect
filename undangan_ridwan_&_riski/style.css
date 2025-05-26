@@ -1,3 +1,8 @@
+/* INTRO */
+#mainContent {
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
 /* Mengatur keseluruhan tampilan halaman */
 body {
     background-color: #fff8e7;    /* Warna latar belakang (cream) */
