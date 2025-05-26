@@ -1,64 +1,116 @@
-/* INTRO */
-#mainContent {
-  animation: fadeIn 1s ease-in-out forwards;
-}
-
 /* Mengatur keseluruhan tampilan halaman */
-body {
-    background-color: #fff8e7;    /* Warna latar belakang (cream) */
-    font-family: sans-serif;      /* Jenis huruf tanpa kait */
-    margin: 0;
-    padding: 0;
-    text-align: center;
-  }
+body, html {
+  background-color: #fff8e7;    /* Warna latar belakang (cream) */
+  font-family: sans-serif;      /* Jenis huruf tanpa kait */
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  height: 100%;
+}
   
 .hero-kanan {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-  }
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
 
 /* mobile default */
 .layout {
   display: block;
 }
+
 .hero-left {
   display: none;
 }
+
 .hero-right {
   width: 100%;
-  padding: 24px;
+  max-width: 600px;         /* Batasi lebar agar tetap proporsional */
+  margin: 0 auto;
+  padding: 10px 24px;
   background-color: #fff8e7;
 }
 
-/* desktop */
-@media (min-width: 768px) {
-  .layout {
-    display: flex;
-    height: 100vh;
-  }
+/* GLOBAL */
+* {
+  box-sizing: border-box;
+}
 
-  .hero-left {
-    display: block;
-    width: 90%;
-    background-image: url('gambar-besar.jpg'); /* sesuaikan nama file gambar */
-    background-size: cover;
-    background-position: center;
-  }
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 
-  .hero-right {
-    width: 50%;
-    padding: 60px;
-    overflow-y: auto;
+/* INTRO */
+#mainContent {
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  background-color: #f8f5f0;
+}
+
+.intro-content {
+  opacity: 0;
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #555;
+  margin-bottom: 0.7rem;
+}
+
+.names {
+  font-size: 3.5rem;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.dear {
+  margin-top: 4rem;
+  font-size: 1rem;
+  color: #555;
+  line-height: 2;
+}
+
+.tamu {
+  font-size: 1.7rem;
+  margin-bottom: 2.5rem;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
 }
 
-
+/* halaman pembuka*/
 .keterangan1 {
-    font-size: 25px;
+    font-size: 1.5rem;
     color: #3a3a3a;
     margin-top: 10px;
   }
@@ -80,7 +132,8 @@ h1 {
 .panah {
     font-size: 32px;
     animation: lompat 1.5s infinite;
-    margin-top: 10px;
+    margin-top: 0px;
+    margin-bottom: 20px;
   }
   
 @keyframes lompat {
@@ -88,32 +141,65 @@ h1 {
     50% { transform: translateY(8px); }
     100% { transform: translateY(0); }
   }
-  
+
+.scroll {
+  margin-bottom: 3px;
+}  
+
 .spasi-scroll {
-    height:5vh; /* 100% tinggi layar */
-  }
-
-.scroll-hint {
-    position: absolute;
-    bottom: 20px;
-    text-align: center;
-    color: #5e3023;
-    font-size: 18px;
-    animation: muncul 2s ease-out;
-  }
-
-.foto-love {
-    padding: 50px 16px;
-    text-align: center;
+  height:5vh; /* 100% tinggi layar */
 }
 
+.scroll-hint {
+  position: absolute;
+  bottom: 45px;
+  text-align: center;
+  color: #5e3023;
+  font-size: 16px;
+  animation: muncul 2s ease-out;
+}
+
+/*halaman doa*/
+
 .zoom-in img {
-    max-width: 400px;
-    height: auto;
-    max-height: 500px; /* atau sesuai kebutuhan */
-    border-radius: 12px;
-    object-fit: cover;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 500px; /* atau sesuai kebutuhan */
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 1rem 0;
+    font-weight: lighter;
+  }
+
+.doa {
+  margin-bottom: 100px;
+
+} 
+
+.ar-rum {
+    font-size: 1rem;
+    padding: 0 0.3rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+
+/*halaman bride and groom*/
+
+.bride_n_groom {
+  background:  #fceee3;
+  width: 100%;
+  min-height: 700px;
+  margin: 50px auto;
+  margin-bottom: 0px;
+  padding: 90px 25px;
 }
 
 .isi{
@@ -171,9 +257,8 @@ h1 {
   text-align: center;
 }
 
-
 .box-acara h1,
-.box-acara p {
+.box-acara {
   margin-bottom: 30px;
 }
 
@@ -204,40 +289,39 @@ h1 {
 }
 
 .kutipan, .galeri {
-    padding: 30px 16px;
-    text-align: center;
-  }
+  padding: 30px 16px;
+  text-align: center;
+}
 
-.kutipan, .doa h3 {
-    font-style: italic;
-    color: #5e3023;
-  }
+.kutipan {
+  font-style: italic;
+  color: #5e3023;
+}
+
+.fade-right img {
+  max-width: 500px;
+  height: auto;
+  max-height: 500px; /* atau sesuai kebutuhan */
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.fade-right img{
+  max-height: 300px;
+  max-width: 300px;
+}
+
+.box-acara {
+  padding: 40px 20px;
+  min-height: 540px;
+  border-radius: 60px;
+}
+
+.box-acara .isi h1 {
+  font-size: 3.5rem;
+}
   
-  .fade-right img {
-    max-width: 500px;
-    height: auto;
-    max-height: 500px; /* atau sesuai kebutuhan */
-    border-radius: 12px;
-    object-fit: cover;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-    .fade-right img{
-      max-height: 300px;
-      max-width: 300px;
-    }
-
-    .box-acara {
-    padding: 40px 20px;
-    min-height: 540px;
-    border-radius: 60px;
-  }
-    .box-acara .isi h1 {
-    font-size: 3.5rem;
-  }
-  
-
-
 .galeri-zoom {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -448,4 +532,130 @@ button {
     padding: 10px;
     border-left: 5px solid #913a3a;
     border-radius: 5px;
+}
+
+/* desktop */
+@media (min-width: 768px) {
+  .layout {
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .hero-left {
+    display: block;
+    width: 90%;
+    background-image: url('gambar-besar.jpg'); /* sesuaikan nama file gambar */
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-right {
+    flex-shrink: 0;
+    min-width: 500px;
+    padding: 60px;
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
+
+/* RESPONSIVE PERBAIKAN UNTUK TAMPILAN MOBILE */
+@media screen and (max-width: 767px) {
+  body {
+    font-size: 14px;
+  }
+
+  .layout {
+    display: block;
+  }
+
+  .hero-left {
+    display: none !important;
+  }
+
+  .hero-right {
+    width: 100%;
+    padding: 20px;
+  }
+
+  /*halaman pembuka*/
+  .judul {
+    font-size: 55px;
+  }
+
+  .tanggal {
+    font-size: 20px;
+    color: #3a3a3a;
+    margin-top: 40px;
+  }
+
+  .scroll-hint {
+    font-size: 16px;
+    position: absolute;
+    bottom: 15px;
+    text-align: center;
+  }
+
+  .scroll {
+    margin-bottom: 3px;
+  }  
+
+  /*halaman doa*/
+  .zoom-in img, .fade-right img {
+    max-width: 85%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 12px;
+  }
+
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 1rem 0;
+  }
+
+  h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 1rem 0;
+    font-weight: lighter;
+  }
+
+  .ar-rum {
+    font-size: 1rem;
+    padding: 0 0.3rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .kutipan, .galeri, .container {
+    padding: 20px 12px;
+  }
+
+  .box-acara, .isi, .resepsi {
+    width: 90%;
+    padding: 40px 30px;
+    border-radius: 250px;
+    min-height: 800px;
+  }
+
+  .galeri-zoom {
+    grid-template-columns: 1fr;
+  }
+
+  .item.landscape {
+    grid-column: span 1;
+  }
+
+  .box-acara h1 {
+    font-size: 2.5rem;
+  }
+
+  .gift-section,
+  .container,
+  .kutipan {
+    padding: 16px;
+  }
 }
