@@ -110,37 +110,35 @@ button:hover {
 
 /* halaman pembuka*/
 .keterangan1 {
-    font-size: 1.5rem;
-    color: #3a3a3a;
-    margin-top: 10px;
-  }
+  font-size: 1.5rem;
+  color: #3a3a3a;
+  margin-top: 10px;
+}
 
-/* Gaya untuk judul utama */
 h1 {
-    font-size: 55px;
-    color: #5e3023;
-    margin-top: 10px;
-  }
-  
-/* Gaya untuk paragraf */
+  font-size: 55px;
+  color: #5e3023;
+  margin-top: 10px;
+}
+
 .tanggal {
-    font-size: 20px;
-    color: #3a3a3a;
-    margin-top: 40px;
-  }
+  font-size: 20px;
+  color: #3a3a3a;
+  margin-top: 40px;
+}
     
 .panah {
-    font-size: 32px;
-    animation: lompat 1.5s infinite;
-    margin-top: 0px;
-    margin-bottom: 20px;
-  }
+  font-size: 32px;
+  animation: lompat 1.5s infinite;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
   
 @keyframes lompat {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(8px); }
-    100% { transform: translateY(0); }
-  }
+  0% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+  100% { transform: translateY(0); }
+}
 
 .scroll {
   margin-bottom: 3px;
@@ -535,7 +533,7 @@ button {
 }
 
 /* desktop */
-@media (min-width: 768px) {
+@media (min-width: 500px) {
   .layout {
     display: flex;
     min-height: 100vh;
@@ -545,7 +543,6 @@ button {
 
   .hero-left {
     display: block;
-    width: 90%;
     background-image: url('gambar-besar.jpg'); /* sesuaikan nama file gambar */
     background-size: cover;
     background-position: center;
@@ -561,7 +558,7 @@ button {
 }
 
 /* RESPONSIVE PERBAIKAN UNTUK TAMPILAN MOBILE */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 500px) {
   body {
     font-size: 14px;
   }

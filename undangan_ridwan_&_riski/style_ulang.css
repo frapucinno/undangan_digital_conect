@@ -1,0 +1,220 @@
+/* Global Mengatur keseluruhan tampilan halaman */
+body, html {
+  background-color: #fff8e7;    /* Warna latar belakang (cream) */
+  font-family: sans-serif;      /* Jenis huruf tanpa kait */
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* INTRO */
+#mainContent {
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  background-color: #f8f5f0;
+}
+
+.intro-content {
+  opacity: 0;
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #555;
+  margin-bottom: 0.7rem;
+}
+
+.names {
+  font-size: 3.5rem;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.dear {
+  margin-top: 4rem;
+  font-size: 1rem;
+  color: #555;
+  line-height: 2;
+}
+
+.tamu {
+  font-size: 1.7rem;
+  margin-bottom: 2.5rem;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* gambar kiri */
+.layout {
+  display: block;
+}
+
+.hero-left {
+  display: none;
+}
+
+/* konten kanan */
+.hero-kanan {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.hero-right {
+  width: 100%;
+  max-width: 500px;         /* Batasi lebar agar tetap proporsional */
+  background-color: #fff8e7;
+}
+
+/* halaman pembuka*/
+.keterangan1 {
+  font-size: 1.2rem;
+  color: #3a3a3a;
+  margin-top: 10px;
+}
+
+.judul {
+  font-size: 40px;
+  color: #5e3023;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.tanggal {
+  font-size: 20px;
+  color: #3a3a3a;
+  margin-top: 20px;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2px;
+  text-align: center;
+  color: #5e3023;
+  font-size: 16px;
+  animation: muncul 2s ease-out;
+}
+    
+.scroll {
+  font-size: 0.9rem;  
+  margin-bottom: 3px;
+}  
+
+.panah {
+  font-size: 30px;
+  animation: lompat 1.5s infinite;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+  
+@keyframes lompat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+  100% { transform: translateY(0); }
+}
+
+.spasi-scroll {
+  height: 10vh;  
+}
+
+/*halaman doa*/
+.pengantar {
+  background-color: chocolate;
+  padding-top: 2.5rem;  
+}
+
+.zoom-in img {
+  margin: 10px auto;
+  max-width: 84%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* TAMPILAN DESKTOP TERKHUSUS */
+@media (min-width: 600px) {
+  .layout {
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .hero-left {
+    display: block;
+    width: 90%;
+    background-image: url('gambar-besar.jpg'); /* sesuaikan nama file gambar */
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-right {
+    flex-shrink: 0;
+    min-width: 500px;
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
+
+/* TAMPILAN MOBILE */
+@media screen and (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+
+    .layout {
+        display: block;
+    }
+
+    .hero-left {
+        display: none !important;
+    }
+
+    .hero-right {
+        width: 100%;
+    }    
+    
+}
