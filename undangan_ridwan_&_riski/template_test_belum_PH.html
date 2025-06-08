@@ -23,7 +23,7 @@
         Bapak/ Ibu/ Saudara/ i
       </p>
       <p class="tamu">Nama Tamu</p>
-      <button id="openInvitation">Buka Undangan</button>
+      <button id="openInvitation" class="openInvitation">Buka Undangan</button>
     </div>
   </div>
 
@@ -72,6 +72,9 @@
         
         <!--halaman 3 bride dan groom-->
         <section class="bride_n_groom">
+          <div class="brngr">
+            <h2>BRIDE & GROOM</h2>
+          </div>
           <div class="opening1">
               <p>Assalamualaikum Wr. Wb.<br>
                   Dengan memohon Rahmat & Ridho Allah SWT, kami bermaksud<br>
@@ -79,13 +82,13 @@
                   pernikahan putra-putri kami:</p>
           </div>
           <div class="bride">
-              <img src="bride.jpeg" alt="Foto bride" style="width: 200px; border-radius: 100px;" />
+              <img src="bride.jpeg" alt="Foto bride" style="width: 200px; border-radius: 100px; margin: 0 auto;" />
               <h1 class="panggilan1">Riski</h1>
               <h2 class="nama_lengkap1">Riski Novrianti,S.T.</h2>
               <p>Putri Pertama dari Bapak Junaidi,S.H.<br>
               & Ibu Suri Ema (Almh)/ Ajeng Suci Megawati Farisi</p>
-              <h1>&</h1>
-              <img src="groom.jpeg" alt="Foto bride" style="width: 200px; border-radius: 100px;" />
+              <h1 class="dan">&</h1>
+              <img src="groom.jpeg" alt="Foto bride" style="width: 200px; border-radius: 100px; margin: 0 auto;" />
               <h1 class="panggilan1">Ridwan</h1>
               <h2 class="nama_lengkap1">Muhammad Ridwan,S.H.,M.H.</h2>
               <p>Putra Pertama dari Bapak Suparman,A.Ptnh.,M.H.<br>
@@ -106,7 +109,7 @@
 
         <!--halaman 5 info acara-->
         <section class="box-acara">
-          <div class="isi">
+          <div class="akad">
               <h2>AKAD NIKAH</h2>
               <p>JUM’AT</p>
               <h1>24</h1>
@@ -143,6 +146,7 @@
           </div>
         </section>
         
+        <h2>OUR GALLERY</h2>
         <section class="galeri-statis">
           <div class="galeri-zoom">
             <a data-fancybox="galeriku" href="foto1.jpg" data-caption="Foto 1" class="item landscape">
@@ -171,12 +175,12 @@
               <!-- Konten rekening dan alamat -->
               <div class="bank-card">
                 <p>002001191591500<br><strong>RISKI NOVRIANTI</strong></p>
-                <button onclick="copyToClipboard('002001191591500')">Copy</button>
+                <button class= "copy-btn" onclick="copyToClipboard('002001191591500')">Copy</button>
               </div>
 
               <div class="bank-card">
                 <p>563501048775536<br><strong>MUHAMMAD RIDWAN</strong></p>
-                <button onclick="copyToClipboard('563501048775536')">Copy</button>
+                <button class= "copy-btn" onclick="copyToClipboard('563501048775536')">Copy</button>
               </div>
 
               <div class="gift-info">
@@ -197,11 +201,11 @@
             <p>Berikan ucapan harapan dan do’a kepada kedua mempelai</p>
             <div class="counter">
                 <div class="hadir-box">
-                    <p id="count-hadir">0</p>
+                    <p class="count-hadir" id="count-hadir">0</p>
                     <span>Hadir</span>
                 </div>
                 <div class="tidak-hadir-box">
-                    <p id="count-tidak">0</p>
+                    <p class="count-tidak" id="count-tidak">0</p>
                     <span>Tidak Hadir</span>
                 </div>
             </div>
@@ -213,12 +217,27 @@
                     <option value="Hadir">Hadir</option>
                     <option value="Tidak Hadir">Tidak Hadir</option>
                 </select>
-                <button type="submit">Kirim</button>
+                <button class="submit" type="submit">Kirim</button>
             </form>
             <div class="comments" id="comments"></div>
         </div>
 
         <!--PENUTUP BUAT DISINI-->
+        <div class="penutup">
+          <section class="foto-akhir">
+            <div class="last-pic">
+                <img src="foto4.jpg" alt="Foto Prewedding" />
+            </div>
+          </section>
+          
+          <section class="kutipan-penutup">
+            <div class="sekian">
+                <h3 class="kata-penutup">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir dan memberikan doa restunya untuk pernikahan kami.
+                  <br>Atas doa & restunya, kami ucapkan terima kasih.</h3>
+                <h2 class="pelai">RISKI & RIDWAN</h2>
+            </div>
+          </section>
+        </div>
 
       </div>
     </div>

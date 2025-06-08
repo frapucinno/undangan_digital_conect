@@ -70,7 +70,7 @@ gsap.from(".fade-right", {
 });
 
   // Ubah tanggal ini ke tanggal pernikahanmu (format: YYYY-MM-DDTHH:MM:SS)
-const weddingDate = new Date("{{tanggal_countdown}}").getTime();
+const weddingDate = new Date("2025-11-25T09:00:00").getTime();
 
 const updateCountdown = () => {
     const now = new Date().getTime();
