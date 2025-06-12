@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Pemesanan Undangan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="form_style.css">
+</head>
+<body>
+  <h1>Form Pemesanan Undangan</h1>
+  <form id="formUndangan"><!-- LIST PERTANYAAN -->
+    <input type="text" name="nama_lengkap_pria" placeholder="Nama Lengkap Pria" required />
+    <input type="text" name="nama_pria" placeholder="Nama Panggilan Pria" required />
+    
+    <input type="text" name="nama_lengkap_wanita" placeholder="Nama Lengkap Wanita" required />
+    <input type="text" name="nama_wanita" placeholder="Nama Panggilan Wanita" required />
+    
+    <input type="text" name="nama_ayah_wanita" placeholder="Nama Ayah Mempelai Wanita" required />
+    <input type="text" name="wanita_anak_ke" placeholder="Mempelai Wanita Anak Ke Berapa (mis: Pertama, Kedua, Ketiga, dst)" required />
+    <input type="text" name="nama_ibu_wanita" placeholder="Nama Ibu Mempelai Wanita" required />
+    
+    <input type="text" name="nama_ayah_pria" placeholder="Nama Ayah Mempelai Pria" required />
+    <input type="text" name="pria_anak_ke" placeholder="Mempelai Pria Anak Ke Berapa (mis: Pertama, Kedua, Ketiga, dst)" required />
+    <input type="text" name="nama_ibu_pria" placeholder="Nama Ibu Mempelai Pria" required />
+    
+    <input type="text" name="lokasi_akad" placeholder="Lokasi Akad" required />
+    <input type="url" name="link_lokasi_akad" placeholder="Link Google Maps Lokasi Akad" required />
+    
+    <input type="text" name="tanggal_resepsi" placeholder="Tanggal Resepsi (mis: 20 Juni 2025)" required />
+    <input type="text" name="lokasi_resepsi" placeholder="Lokasi Resepsi" required />
+    <input type="url" name="link_lokasi_resepsi" placeholder="Link Google Maps Lokasi Resepsi" required />
+
+    <input type="text" name="no_rek1" placeholder="Nomor Rekening 1" required />
+    <input type="text" name="an_bank1" placeholder="Atas Nama" required />
+    <input type="text" name="nama_bank1" placeholder="Nama Bank (mis: BCA, BRI, MANDIRI)" required />
+
+    <input type="text" name="no_rek2" placeholder="Nomor Rekening 2" required />
+    <input type="text" name="an_bank2" placeholder="Atas Nama" required />
+    <input type="text" name="nama_bank2" placeholder="Nama Bank (mis: BCA, BRI, MANDIRI)" required />
+
+    <input type="text" name="nama_penerima_hadiah" placeholder="Nama Penerima Hadiah" required />
+    <input type="text" name="no_hp_penerima" placeholder="NO HP Penerima Hadiah" required />
+    <input type="text" name="alamat_penerima" placeholder="Alamat Penerima Hadiah" required />
+    
+    <button type="submit">Kirim</button>
+  </form>
+
+  <!-- Firebase SDK -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
+  <script type="module" src="form_script.js"></script>
+</body>
+</html>

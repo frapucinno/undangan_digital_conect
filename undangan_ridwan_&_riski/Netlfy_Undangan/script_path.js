@@ -5,12 +5,12 @@ import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10
 
 // ✅ Konfigurasi Firebase (GANTI dengan punyamu!)
 const firebaseConfig = {
-  apiKey: "AIzaSyCoWoEPyOBaPmiFIxfS3GsVNTpcdNKp4Q8",
-  authDomain: "skala-invee.firebaseapp.com",
-  projectId: "skala-invee",
-  storageBucket: "skala-invee.firebasestorage.app",
-  messagingSenderId: "969423263700",
-  appId: "1:969423263700:web:72697c1ed5855a74dc2841"
+  apiKey: "AIzaSyCtpcwFxUsllDtfJFksKZWKA3iKWjjIyCQ",
+  authDomain: "formbase-skalainvee.firebaseapp.com",
+  projectId: "formbase-skalainvee",
+  storageBucket: "formbase-skalainvee.appspot.com",
+  messagingSenderId: "195305733982",
+  appId: "1:195305733982:web:ad589279eb0d02687c99cf"
 };
 
 // Inisialisasi Firebase
@@ -19,22 +19,52 @@ const db = getFirestore(app);
 
 // Jalankan setelah halaman dimuat
 document.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  const undanganId = params.get("id");
-
+  const path = window.location.pathname;
+  const undanganId = path.replace(/^\/+/, ""); // hapus / di awal
   if (!undanganId) {
     document.body.innerHTML = "<h2>URL tidak memiliki parameter ?id=...</h2>";
     return;
   }
 
-  const docRef = doc(db, "Undangan First Design", undanganId);
+  const docRef = doc(db, "undangan", undanganId);
   getDoc(docRef).then((docSnap) => {
     if (docSnap.exists()) {
       const data = docSnap.data();
+      //isian dari form (koleksi firestore)
       document.getElementById("nama-mempelai-intro").innerText = `${data.nama_wanita} & ${data.nama_pria}`;
       document.getElementById("nama-mempelai-judul").innerText = `${data.nama_wanita} & ${data.nama_pria}`;
-      document.getElementById("tanggal").innerText = data.tanggal;
-      document.getElementById("lokasi").innerText = `📍${data.lokasi}`;
+
+      document.getElementById("nama-panggilan-wanita").innerText = data.nama_wanita;
+      document.getElementById("nama-lengkap-wanita").innerText = data.nama_lengkap_wanita;
+      
+      document.getElementById("nama-panggilan-pria").innerText = data.nama_pria;
+      document.getElementById("nama-lengkap-pria").innerText = data.nama_lengkap_pria;
+      
+      document.getElementById("nama-ayah-wanita-ke").innerText = `Putri ${data.wanita_anak_ke} dari Bapak ${data.nama_ayah_wanita}`;
+      document.getElementById("nama-ibu-wanita").innerText = `& Ibu ${data.nama_ibu_wanita}`;
+      
+      document.getElementById("nama-ayah-pria-ke").innerText = `Putra ${data.pria_anak_ke} dari Bapak ${data.nama_ayah_pria}`;
+      document.getElementById("nama-ibu-pria").innerText = `& Ibu ${data.nama_ibu_pria}`;
+     
+      document.getElementById("lokasi-akad").innerText = `📍${data.lokasi_akad}`;
+      document.getElementById("link-lokasi-akad").href = data.link_lokasi_akad;
+
+      document.getElementById("tanggal-resepsi").innerText = data.tanggal_resepsi;
+      document.getElementById("lokasi-resepsi").innerText = `📍${data.lokasi_resepsi}`;
+      document.getElementById("link-lokasi-resepsi").href = data.link_lokasi_resepsi;
+
+      document.getElementById("nama-bank1").innerText = data.nama_bank1;
+      document.getElementById("no-rek1").innerText = data.no_rek1;
+      document.getElementById("an-bank1").innerText = data.an_bank1;
+
+      document.getElementById("nama-bank2").innerText = data.nama_bank2;
+      document.getElementById("no-rek2").innerText = data.no_rek2;
+      document.getElementById("an-bank2").innerText = data.an_bank2;
+
+      document.getElementById("nama-penerima-hadiah").innerText = `Nama Penerima: ${data.nama_penerima_hadiah}`;
+      document.getElementById("no-hp-penerima").innerText = `No HP:${data.no_hp_penerima}`;
+      document.getElementById("alamat-penerima").innerText = `Alamat:${data.alamat_penerima}`;
+      
     } else {
       document.body.innerHTML = "<h2>Undangan tidak ditemukan</h2>";
     }

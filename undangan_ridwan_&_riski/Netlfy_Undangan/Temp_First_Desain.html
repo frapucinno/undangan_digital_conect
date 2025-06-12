@@ -31,7 +31,7 @@
   <div id="mainContent" class="main-content" style="display:none;">
     <div class="layout">
       <!--kiri-->
-      <div class="hero-left"></div> <!-- gambar besar -->
+      <div class="hero-left"></div> <!-- GANTI JADI IMG PADA HTML SAJA -->
       
       <!--kanan-->
       <div class="hero-right">
@@ -39,7 +39,7 @@
         <section class="hero-kanan">
           <p class="keterangan1">The Wedding of</p>
           <h1 id="nama-mempelai-judul" class="judul">hmmm</h1>
-          <p id="tanggal" class="tanggal">hmmm</p>
+          <p id="tanggal-resepsi" class="tanggal">hmmm</p> <!-- GANTI TYPE TIMESTAMP -->
 
           <div class="scroll-hint">
               <p class="scroll">Scroll ke bawah untuk melihat detail acara</p>
@@ -52,7 +52,7 @@
         <!--halaman 2 doa-->
         <div class="pengantar">
           <section class="foto-love">
-            <div class="zoom-in">
+            <div class="zoom-in"> <!-- GANTI JADI IMG DI INPUT -->
                 <img src="preweed.jpg" alt="Foto Prewedding" style="width: 100%; border-radius: 12px;" />
             </div>
           </section>
@@ -81,18 +81,18 @@
                   untuk menghadiri acara<br>
                   pernikahan putra-putri kami:</p>
           </div>
-          <div class="bride">
+          <div class="bride"> <!-- GANTI JADI IMG INPUT -->
               <img src="bride.jpeg" alt="Foto bride" style="width: 200px; border-radius: 100px; margin: 0 auto;" />
-              <h1 class="panggilan1">Riski</h1>
-              <h2 class="nama_lengkap1">Riski Novrianti,S.T.</h2>
-              <p>Putri Pertama dari Bapak Junaidi,S.H.<br>
-              & Ibu Suri Ema (Almh)/ Ajeng Suci Megawati Farisi</p>
-              <h1 class="dan">&</h1>
+              <h1 class="panggilan1" id="nama-panggilan-wanita">hmmm</h1>
+              <h2 class="nama_lengkap1" id="nama-lengkap-wanita">hmmmm hmmm</h2>
+              <span id="nama-ayah-wanita-ke">HMMM</span><br>
+              <span id="nama-ibu-wanita">hmmmmmmm</span>
+              <h1 class="dan">&</h1><!-- GANTI JADI IMG INPUT -->
               <img src="groom.jpeg" alt="Foto bride" style="width: 200px; border-radius: 100px; margin: 0 auto;" />
-              <h1 class="panggilan1">Ridwan</h1>
-              <h2 class="nama_lengkap1">Muhammad Ridwan,S.H.,M.H.</h2>
-              <p>Putra Pertama dari Bapak Suparman,A.Ptnh.,M.H.<br>
-              & Ibu Dra. Minuk Mailany</p>
+              <h1 class="panggilan1" id="nama-panggilan-pria">hmmm</h1>
+              <h2 class="nama_lengkap1" id="nama-lengkap-pria">hmmm hmmm</h2>
+              <span id="nama-ayah-pria-ke">HMMM</span><br>
+              <span id="nama-ibu-pria">hmmmmmm</span>
           </div>
         </section>
 
@@ -115,8 +115,8 @@
               <h1>24</h1>
               <p>JANUARI 2025</p>
               <p>Pukul: 14.00 WIB</p>
-              <p id="lokasi">dimana???</p>
-              <a href="#" class="btn-lokasi">📌 LIHAT LOKASI</a>
+              <p id="lokasi-akad">dimana???</p>
+              <a id="link-lokasi-akad" href="#" class="btn-lokasi" target="_blank">📌 LIHAT LOKASI AKAD</a>
           </div>
         </section>
 
@@ -127,8 +127,8 @@
               <h1>26</h1>
               <p>JANUARI 2025</p>
               <p>Pukul: 11.00 WIB - Selesai</p>
-              <p>📍 Jl. Lintas Timur RT 06 Desa Sekernan, Kec. Sekernan, Kab. Muaro Jambi</p>
-              <a href="#" class="btn-lokasi">📌 LIHAT LOKASI</a>
+              <p id="lokasi-resepsi">dimana???</p>
+              <a id="link-lokasi-resepsi" href="#" class="btn-lokasi" target="_blank">📌 LIHAT LOKASI RESEPSI</a>
           </div>
         </section>
         
@@ -174,21 +174,24 @@
             <div class="gift-content">
               <!-- Konten rekening dan alamat -->
               <div class="bank-card">
-                <p>002001191591500<br><strong>RISKI NOVRIANTI</strong></p>
-                <button class= "copy-btn" onclick="copyToClipboard('002001191591500')">Copy</button>
+                <span id="nama-bank1">nama bank 1</span><br>
+                <span id="no-rek1">xxxxxxxxxx</span><br>
+                <span id="an-bank1">AN SIAPA???</span>
+                <button class= "copy-btn" onclick="copyToClipboard('no-rek1')">Copy</button>
               </div>
 
               <div class="bank-card">
-                <p>563501048775536<br><strong>MUHAMMAD RIDWAN</strong></p>
-                <button class= "copy-btn" onclick="copyToClipboard('563501048775536')">Copy</button>
+                <span id="nama-bank2">nama bank 2</span><br>
+                <span id="no-rek2">xxxxxxxxxx</span><br>
+                <span id="an-bank2">AN SIAPA???</span>
+                <button class= "copy-btn" onclick="copyToClipboard('no-rek2')">Copy</button>
               </div>
 
               <div class="gift-info">
                 <h3>🎁 Kirim Hadiah</h3>
-                <p>
-                  Nama Penerima: Muhammad Ridwan<br>
-                  No HP: 081368054310<br>
-                  Alamat: Jl. Walisongo No. 33 ...
+                <span id="nama-penerima-hadiah">siapa namanya</span><br>
+                <span id="no-hp-penerima">berapa nomornya</span><br>
+                <span id="alamat-penerima">Alamat: Jl. Walisongo No. 33 ...</span>
                 </p>
               </div>
             </div>
@@ -249,7 +252,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js" type="module"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js" type="module"></script>
   <!-- JS lokal -->
-  <script type="module" src="script.js"></script>
+  <script type="module" src="script_path.js"></script>
   
   <!-- Lightbox2 JS -->
   <script src="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/js/lightbox.min.js"></script>
@@ -282,11 +285,16 @@
       }
     });
 
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text)
-        .then(() => alert("Nomor rekening disalin!"))
-        .catch(() => alert("Gagal menyalin"));
-    }
+    function copyToClipboard(idTarget) {
+      const textToCopy = document.getElementById(idTarget).innerText;
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          alert("Nomor rekening berhasil disalin!");
+        })
+        .catch(err => {
+          console.error("Gagal menyalin: ", err);
+        });
+      }
   </script>
 
 </body>
