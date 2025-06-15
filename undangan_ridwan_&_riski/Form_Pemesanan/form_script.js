@@ -13,6 +13,25 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+async function uploadToCloudinary(file) {
+  const cloudName = "dfb4jegqs"; // ganti dengan cloud name milikmu
+  const preset = "Foto_Undangan_oto";           // ganti dengan nama upload preset yang sudah kamu buat
+
+  const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", preset);
+
+  const response = await fetch(url, {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await response.json();
+  return data.secure_url; // URL publik gambar
+}
+
+
 document.getElementById("formUndangan").addEventListener("submit", async (e) => {
   e.preventDefault(); //script lanjutan pertanyaan form
   const form = e.target;
@@ -30,11 +49,13 @@ document.getElementById("formUndangan").addEventListener("submit", async (e) => 
   const pria_anak_ke = form.pria_anak_ke.value.trim();
   const nama_ibu_pria = form.nama_ibu_pria.value.trim();
 
-  
+  const tanggal_akad = new Date(form.tanggal_akad.value);
+
   const lokasi_akad = form.lokasi_akad.value;
   const link_lokasi_akad = form.link_lokasi_akad.value.trim();
 
-  const tanggal_resepsi = form.tanggal_resepsi.value;
+  const tanggal_resepsi = new Date(form.tanggal_resepsi.value);
+
   const lokasi_resepsi = form.lokasi_resepsi.value;
   const link_lokasi_resepsi = form.link_lokasi_resepsi.value.trim();
 
@@ -53,16 +74,24 @@ document.getElementById("formUndangan").addEventListener("submit", async (e) => 
   const slug = `${nama_pria.toLowerCase()}-${nama_wanita.toLowerCase()}`.replace(/\s+/g, "-");
 
   try {
+    const fileHero = form.hero_img.files[0];
+    let hero_img_url = "";
+
+    if (fileHero) {
+      hero_img_url = await uploadToCloudinary(fileHero);
+    }
+
     await setDoc(doc(db, "undangan", slug), { //INI HARUS DIUBAH SESUAI PERTANYAAN
       nama_lengkap_pria, nama_pria, 
       nama_lengkap_wanita, nama_wanita, 
       nama_ayah_wanita, wanita_anak_ke, nama_ibu_wanita,
       nama_ayah_pria, pria_anak_ke, nama_ibu_pria,   
-      lokasi_akad, link_lokasi_akad,
+      tanggal_akad, lokasi_akad, link_lokasi_akad,
       tanggal_resepsi, lokasi_resepsi, link_lokasi_resepsi,
       no_rek1, an_bank1, nama_bank1,
       no_rek2, an_bank2, nama_bank2,
-      nama_penerima_hadiah, no_hp_penerima, alamat_penerima
+      nama_penerima_hadiah, no_hp_penerima, alamat_penerima,
+      hero_img: hero_img_url
     });
     alert(`Data berhasil disimpan! Link undangan: /${slug}`);
     form.reset();
