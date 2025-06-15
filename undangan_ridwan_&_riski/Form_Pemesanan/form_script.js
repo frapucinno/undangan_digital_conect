@@ -13,6 +13,36 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+function compressImage(file, maxWidth = 1080, quality = 0.7) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.src = event.target.result;
+
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const scale = maxWidth / img.width;
+        canvas.width = maxWidth;
+        canvas.height = img.height * scale;
+
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        canvas.toBlob((blob) => {
+          const compressedFile = new File([blob], file.name, {
+            type: "image/jpeg",
+            lastModified: Date.now(),
+          });
+          resolve(compressedFile);
+        }, "image/jpeg", quality);
+      };
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+
 async function uploadToCloudinary(file) {
   const cloudName = "dfb4jegqs"; // ganti dengan cloud name milikmu
   const preset = "Foto_Undangan_oto";           // ganti dengan nama upload preset yang sudah kamu buat
@@ -75,10 +105,35 @@ document.getElementById("formUndangan").addEventListener("submit", async (e) => 
 
   try {
     const fileHero = form.hero_img.files[0];
-    let hero_img_url = "";
+    let hero_img = "";
+
+    const filePrewed = form.foto_prewed.files[0];
+    let foto_prewed = "";
+
+    const fileBride = form.foto_bride.files[0];
+    let foto_bride = "";
+
+    const fileGroom = form.foto_groom.files[0];
+    let foto_groom = "";
 
     if (fileHero) {
-      hero_img_url = await uploadToCloudinary(fileHero);
+      const compressed = await compressImage(fileHero);
+      hero_img = await uploadToCloudinary(compressed);
+    }
+
+    if (filePrewed) {
+      const compressed = await compressImage(filePrewed);
+      foto_prewed = await uploadToCloudinary(compressed);
+    }
+
+    if (fileBride) {
+      const compressed = await compressImage(fileBride);
+      foto_bride = await uploadToCloudinary(compressed);
+    }
+
+    if (fileGroom) {
+      const compressed = await compressImage(fileGroom);
+      foto_groom = await uploadToCloudinary(compressed);
     }
 
     await setDoc(doc(db, "undangan", slug), { //INI HARUS DIUBAH SESUAI PERTANYAAN
@@ -91,7 +146,10 @@ document.getElementById("formUndangan").addEventListener("submit", async (e) => 
       no_rek1, an_bank1, nama_bank1,
       no_rek2, an_bank2, nama_bank2,
       nama_penerima_hadiah, no_hp_penerima, alamat_penerima,
-      hero_img: hero_img_url
+      hero_img,
+      foto_prewed,
+      foto_bride,
+      foto_groom
     });
     alert(`Data berhasil disimpan! Link undangan: /${slug}`);
     form.reset();
