@@ -4,9 +4,66 @@ body {
   max-width: 600px;
   margin: auto;
 }
-input, button {
+
+input {
   display: block;
   width: 100%;
   margin: 10px 0;
   padding: 0.8rem;
 }
+
+button {
+  display: block;
+  width: auto;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 12px;
+}
+
+#preview-galeri {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.preview-foto-galeri {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+
+.preview-foto {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+#btn-kirim {
+  display: block;
+  width: auto;
+  padding: 5px 10px;
+  font-size: 20px;
+  background-color: #28a102;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 15px;
+  margin-bottom: 12px;
+}
+
+button:hover {
+  background-color: #e0e0e0;
+}
+
+

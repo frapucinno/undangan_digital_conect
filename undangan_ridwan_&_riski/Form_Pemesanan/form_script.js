@@ -13,7 +13,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-function compressImage(file, maxWidth = 1080, quality = 0.7) {
+function compressImage(file, maxWidth = 800, quality = 0.6) {
   return new Promise((resolve) => {
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -61,6 +61,106 @@ async function uploadToCloudinary(file) {
   return data.secure_url; // URL publik gambar
 }
 
+//handler untuk foto foto lainya
+let uploadedSingleImages = {
+  hero_img: "",
+  foto_prewed: "",
+  foto_bride: "",
+  foto_groom: ""
+};
+
+function handleSingleImageUpload(inputId, previewId, storageKey) {
+  const input = document.getElementById(inputId);
+  const preview = document.getElementById(previewId);
+
+  input.addEventListener("change", async () => {
+    const file = input.files[0];
+    if (!file) return;
+
+    // Loading indicator
+    const loading = document.createElement("p");
+    loading.innerText = "Mengupload...";
+    preview.innerHTML = "";
+    preview.appendChild(loading);
+
+    // Kompres dan upload
+    const compressed = await compressImage(file);
+    const url = await uploadToCloudinary(compressed);
+
+    // Simpan ke variabel global untuk Firestore nanti
+    uploadedSingleImages[storageKey] = url;
+
+    // Tampilkan preview
+    preview.innerHTML = ""; // hapus loading
+    const img = document.createElement("img");
+    img.src = url;
+    img.classList.add("preview-foto");
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerText = "Hapus";
+    deleteBtn.addEventListener("click", () => {
+      input.value = "";
+      preview.innerHTML = "";
+      uploadedSingleImages[storageKey] = "";
+    });
+
+    preview.appendChild(img);
+    preview.appendChild(deleteBtn);
+  });
+}
+
+handleSingleImageUpload("hero_img", "preview-hero", "hero_img");
+handleSingleImageUpload("foto_prewed", "preview-prewed", "foto_prewed");
+handleSingleImageUpload("foto_bride", "preview-bride", "foto_bride");
+handleSingleImageUpload("foto_groom", "preview-groom", "foto_groom");
+
+
+let fotoGaleriArray = [];
+
+const inputGaleri = document.getElementById("foto_galeri_input");
+const galeriPreview = document.getElementById("preview-galeri");
+const galeriCount = document.getElementById("jumlah-foto");
+
+inputGaleri.addEventListener("change", async function () {
+  const file = this.files[0];
+  if (!file) return;
+  if (fotoGaleriArray.length >= 10) {
+    alert("Maksimal 10 foto galeri.");
+    return;
+  }
+
+  const loading = document.createElement("p");
+  loading.innerText = "Mengupload...";
+  galeriPreview.appendChild(loading);
+
+  const compressed = await compressImage(file);
+  const url = await uploadToCloudinary(compressed);
+
+  fotoGaleriArray.push(url);
+  galeriCount.innerText = `${fotoGaleriArray.length} / 10 foto terunggah`;
+
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("preview-wrapper");
+
+  const img = document.createElement("img");
+  img.src = url;
+  img.classList.add("preview-foto-galeri");
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.innerText = "Hapus";
+  deleteBtn.addEventListener("click", () => {
+    galeriPreview.removeChild(wrapper);
+    fotoGaleriArray = fotoGaleriArray.filter((item) => item !== url);
+    galeriCount.innerText = `${fotoGaleriArray.length} / 10 foto terunggah`;
+  });
+
+  wrapper.appendChild(img);
+  wrapper.appendChild(deleteBtn);
+  galeriPreview.removeChild(loading);
+  galeriPreview.appendChild(wrapper);
+
+  this.value = "";
+});
 
 document.getElementById("formUndangan").addEventListener("submit", async (e) => {
   e.preventDefault(); //script lanjutan pertanyaan form
@@ -146,13 +246,17 @@ document.getElementById("formUndangan").addEventListener("submit", async (e) => 
       no_rek1, an_bank1, nama_bank1,
       no_rek2, an_bank2, nama_bank2,
       nama_penerima_hadiah, no_hp_penerima, alamat_penerima,
-      hero_img,
-      foto_prewed,
-      foto_bride,
-      foto_groom
+      hero_img: uploadedSingleImages.hero_img,
+      foto_prewed: uploadedSingleImages.foto_prewed,
+      foto_bride: uploadedSingleImages.foto_bride,
+      foto_groom: uploadedSingleImages.foto_groom,
+      foto_galeri: fotoGaleriArray
     });
     alert(`Data berhasil disimpan! Link undangan: /${slug}`);
     form.reset();
+    galeriPreview.innerHTML = "";
+    fotoGaleriArray = [];
+    galeriCount.innerText = "0 / 10 foto terunggah";
   } catch (err) {
     console.error("Gagal menyimpan ke Firestore:", err);
     alert("Terjadi kesalahan saat menyimpan data. Coba lagi.");

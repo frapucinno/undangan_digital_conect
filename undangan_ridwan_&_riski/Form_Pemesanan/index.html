@@ -48,17 +48,26 @@
 
     <label for="hero_img">Upload Foto (untuk tampilan desktop)</label>
     <input type="file" id="hero_img" name="hero_img" accept="image/*" required />
+    <div id="preview-hero"></div>
 
     <label for="foto_prewed">Upload Foto (pada bagian do'a)</label>
     <input type="file" id="foto_prewed" name="foto_prewed" accept="image/*" required />
+    <div id="preview-prewed"></div>
 
     <label for="foto_bride">Upload Foto Mempelai Wanita</label>
     <input type="file" id="foto_bride" name="foto_bride" accept="image/*" required />
+    <div id="preview-bride"></div>
 
     <label for="foto_groom">Upload Foto Mempelai Pria</label>
     <input type="file" id="foto_groom" name="foto_groom" accept="image/*" required />
-    
-    <button type="submit">Kirim</button>
+    <div id="preview-groom"></div>
+
+    <label for="foto_galeri">Upload Galeri Foto (maks 10 foto)</label>
+    <input type="file" id="foto_galeri_input" accept="image/*" />
+    <p id="jumlah-foto">0 / 10 foto terunggah</p>
+    <div id="preview-galeri"></div>
+  
+    <button id="btn-kirim" type="submit">Kirim</button>
   </form>
 
   <!-- Firebase SDK -->
