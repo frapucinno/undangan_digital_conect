@@ -199,33 +199,29 @@ document.getElementById("formUndangan").addEventListener("submit", async (e) => 
 
   const slug = `${nama_pria.toLowerCase()}-${nama_wanita.toLowerCase()}`.replace(/\s+/g, "-");
 
-  try {
-    const fileHero = form.hero_img.files[0];
-    let hero_img = "";
+  try {    
+    let hero_img_url = "";
+    
+    let foto_prewed_url = "";
 
-    const filePrewed = form.foto_prewed.files[0];
-    let foto_prewed = "";
+    let foto_bride_url = "";
 
-    const fileBride = form.foto_bride.files[0];
-    let foto_bride = "";
-
-    const fileGroom = form.foto_groom.files[0];
-    let foto_groom = "";
+    let foto_groom_url = "";
 
     if (uploadedSingleImages.hero_img) {
-      hero_img = await uploadToCloudinary(uploadedSingleImages.hero_img);
+      hero_img_url = await uploadToCloudinary(uploadedSingleImages.hero_img);
     }
 
     if (uploadedSingleImages.foto_prewed) {
-      foto_prewed = await uploadToCloudinary(uploadedSingleImages.foto_prewed);
+      foto_prewed_url = await uploadToCloudinary(uploadedSingleImages.foto_prewed);
     }
 
     if (uploadedSingleImages.foto_bride) {
-      foto_bride = await uploadToCloudinary(uploadedSingleImages.foto_bride);
+      foto_bride_url = await uploadToCloudinary(uploadedSingleImages.foto_bride);
     }
 
     if (uploadedSingleImages.foto_groom) {
-      foto_groom = await uploadToCloudinary(uploadedSingleImages.foto_groom);
+      foto_groom_url = await uploadToCloudinary(uploadedSingleImages.foto_groom);
     }
 
     let fotoGaleriUrls = [];
@@ -245,10 +241,10 @@ document.getElementById("formUndangan").addEventListener("submit", async (e) => 
       no_rek1, an_bank1, nama_bank1,
       no_rek2, an_bank2, nama_bank2,
       nama_penerima_hadiah, no_hp_penerima, alamat_penerima,
-      hero_img: uploadedSingleImages.hero_img,
-      foto_prewed: uploadedSingleImages.foto_prewed,
-      foto_bride: uploadedSingleImages.foto_bride,
-      foto_groom: uploadedSingleImages.foto_groom,
+      hero_img: hero_img_url,
+      foto_prewed: foto_prewed_url,
+      foto_bride: foto_bride_url,
+      foto_groom: foto_groom_url,
       foto_galeri: fotoGaleriUrls
     });
     alert(`Data berhasil disimpan! Link undangan: /${slug}`);
