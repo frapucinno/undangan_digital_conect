@@ -130,35 +130,29 @@ inputGaleri.addEventListener("change", async function () {
     alert("Maksimal 10 foto galeri.");
     return;
   }
-
-  const loading = document.createElement("p");
-  loading.innerText = "Mengupload...";
-  galeriPreview.appendChild(loading);
-
+  
   const compressed = await compressImage(file);
-  const url = await uploadToCloudinary(compressed);
-
-  fotoGaleriArray.push(url);
+  fotoGaleriArray.push(compressed);
   galeriCount.innerText = `${fotoGaleriArray.length} / 10 foto terunggah`;
 
   const wrapper = document.createElement("div");
   wrapper.classList.add("preview-wrapper");
 
   const img = document.createElement("img");
-  img.src = url;
+  img.src = URL.createObjectURL(compressed);
   img.classList.add("preview-foto-galeri");
 
   const deleteBtn = document.createElement("button");
   deleteBtn.innerText = "Hapus";
+  deleteBtn.type = "button";
   deleteBtn.addEventListener("click", () => {
     galeriPreview.removeChild(wrapper);
-    fotoGaleriArray = fotoGaleriArray.filter((item) => item !== url);
+    fotoGaleriArray = fotoGaleriArray.filter((item) => item !== compressed);
     galeriCount.innerText = `${fotoGaleriArray.length} / 10 foto terunggah`;
   });
 
   wrapper.appendChild(img);
   wrapper.appendChild(deleteBtn);
-  galeriPreview.removeChild(loading);
   galeriPreview.appendChild(wrapper);
 
   this.value = "";
@@ -234,6 +228,13 @@ document.getElementById("formUndangan").addEventListener("submit", async (e) => 
       foto_groom = await uploadToCloudinary(uploadedSingleImages.foto_groom);
     }
 
+    let fotoGaleriUrls = [];
+
+    for (const file of fotoGaleriArray) {
+      const url = await uploadToCloudinary(file);
+      fotoGaleriUrls.push(url);
+    }
+
     await setDoc(doc(db, "undangan", slug), { //INI HARUS DIUBAH SESUAI PERTANYAAN
       nama_lengkap_pria, nama_pria, 
       nama_lengkap_wanita, nama_wanita, 
@@ -248,7 +249,7 @@ document.getElementById("formUndangan").addEventListener("submit", async (e) => 
       foto_prewed: uploadedSingleImages.foto_prewed,
       foto_bride: uploadedSingleImages.foto_bride,
       foto_groom: uploadedSingleImages.foto_groom,
-      foto_galeri: fotoGaleriArray
+      foto_galeri: fotoGaleriUrls
     });
     alert(`Data berhasil disimpan! Link undangan: /${slug}`);
     form.reset();
