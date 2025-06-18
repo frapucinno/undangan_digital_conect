@@ -77,27 +77,29 @@ function handleSingleImageUpload(inputId, previewId, storageKey) {
     const file = input.files[0];
     if (!file) return;
 
-    // Loading indicator
-    const loading = document.createElement("p");
-    loading.innerText = "Mengupload...";
-    preview.innerHTML = "";
-    preview.appendChild(loading);
-
-    // Kompres dan upload
-    const compressed = await compressImage(file);
-    const url = await uploadToCloudinary(compressed);
-
-    // Simpan ke variabel global untuk Firestore nanti
-    uploadedSingleImages[storageKey] = url;
-
     // Tampilkan preview
     preview.innerHTML = ""; // hapus loading
-    const img = document.createElement("img");
-    img.src = url;
-    img.classList.add("preview-foto");
+    const loading = document.createElement("p");
+    loading.innerText = "Memproses foto...";
+    preview.appendChild(loading);
 
+    // Kompres gambar
+    const compressed = await compressImage(file);
+
+    // Simpan file hasil kompres untuk dikirim saat submit
+    uploadedSingleImages[storageKey] = compressed;
+
+    // Tampilkan preview dari hasil kompresi
+    const previewUrl = URL.createObjectURL(compressed);
+    preview.innerHTML = ""; // hapus loading
+    const img = document.createElement("img");
+    img.src = previewUrl;
+    img.classList.add("preview-foto");
+    
     const deleteBtn = document.createElement("button");
     deleteBtn.innerText = "Hapus";
+    deleteBtn.type = "button";
+    deleteBtn.classList.add("btn-hapus-foto");
     deleteBtn.addEventListener("click", () => {
       input.value = "";
       preview.innerHTML = "";
@@ -216,24 +218,20 @@ document.getElementById("formUndangan").addEventListener("submit", async (e) => 
     const fileGroom = form.foto_groom.files[0];
     let foto_groom = "";
 
-    if (fileHero) {
-      const compressed = await compressImage(fileHero);
-      hero_img = await uploadToCloudinary(compressed);
+    if (uploadedSingleImages.hero_img) {
+      hero_img = await uploadToCloudinary(uploadedSingleImages.hero_img);
     }
 
-    if (filePrewed) {
-      const compressed = await compressImage(filePrewed);
-      foto_prewed = await uploadToCloudinary(compressed);
+    if (uploadedSingleImages.foto_prewed) {
+      foto_prewed = await uploadToCloudinary(uploadedSingleImages.foto_prewed);
     }
 
-    if (fileBride) {
-      const compressed = await compressImage(fileBride);
-      foto_bride = await uploadToCloudinary(compressed);
+    if (uploadedSingleImages.foto_bride) {
+      foto_bride = await uploadToCloudinary(uploadedSingleImages.foto_bride);
     }
 
-    if (fileGroom) {
-      const compressed = await compressImage(fileGroom);
-      foto_groom = await uploadToCloudinary(compressed);
+    if (uploadedSingleImages.foto_groom) {
+      foto_groom = await uploadToCloudinary(uploadedSingleImages.foto_groom);
     }
 
     await setDoc(doc(db, "undangan", slug), { //INI HARUS DIUBAH SESUAI PERTANYAAN
