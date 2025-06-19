@@ -158,6 +158,55 @@ inputGaleri.addEventListener("change", async function () {
   this.value = "";
 });
 
+// Tambahkan variabel untuk menyimpan file MP3
+let uploadedMp3 = null;
+
+// Validasi dan simpan file saat dipilih
+document.getElementById("lagu_mp3").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  // Validasi tipe & ukuran
+  if (file.type !== "audio/mpeg") {
+    alert("File harus berformat .mp3");
+    e.target.value = "";
+    return;
+  }
+
+  if (file.size > 2 * 1024 * 1024) {
+    alert("Ukuran lagu maksimal 2MB.");
+    e.target.value = "";
+    return;
+  }
+
+  uploadedMp3 = file;
+
+  // Tampilkan preview nama file
+  document.getElementById("preview-mp3").innerText = `🎵 File dipilih: ${file.name}`;
+});
+
+// Fungsi upload ke Cloudinary
+async function uploadMp3ToCloudinary(file) {
+  const cloudName = "dfb4jegqs"; // ganti dengan cloud name kamu
+  const uploadPreset = "mp3_upload_preset"; // preset yang kamu buat di Cloudinary
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", uploadPreset);
+  formData.append("resource_type", "video"); // wajib untuk mp3/audio
+
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/video/upload`, {
+    method: "POST",
+    body: formData,
+  });
+
+  const data = await res.json();
+  return data.secure_url;
+}
+
+
+
+
 document.getElementById("formUndangan").addEventListener("submit", async (e) => {
   e.preventDefault(); //script lanjutan pertanyaan form
   const form = e.target;
@@ -231,6 +280,12 @@ document.getElementById("formUndangan").addEventListener("submit", async (e) => 
       fotoGaleriUrls.push(url);
     }
 
+    let lagu_url = "";
+
+    if (uploadedMp3) {
+      lagu_url = await uploadMp3ToCloudinary(uploadedMp3);
+    }
+
     await setDoc(doc(db, "undangan", slug), { //INI HARUS DIUBAH SESUAI PERTANYAAN
       nama_lengkap_pria, nama_pria, 
       nama_lengkap_wanita, nama_wanita, 
@@ -245,7 +300,8 @@ document.getElementById("formUndangan").addEventListener("submit", async (e) => 
       foto_prewed: foto_prewed_url,
       foto_bride: foto_bride_url,
       foto_groom: foto_groom_url,
-      foto_galeri: fotoGaleriUrls
+      foto_galeri: fotoGaleriUrls,
+      lagu_url
     });
     alert(`Data berhasil disimpan! Link undangan: /${slug}`);
     form.reset();
